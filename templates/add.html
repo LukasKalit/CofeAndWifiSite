@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Add A New Cafe{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-12 col-md-8">
+      <div class="row py-2">
+        <h1>Add a new cafe into the database</h1>
+      </div>
+      
+
+      <form method="POST" novalidate>
+        {{ form.csrf_token }}
+        <div class="row">
+            <div class="col-12">
+                {% for field in form %}
+                    {% if field.type !=  "CSRFTokenField" %}
+                        {{ field.label }}<br>
+                        {{ field }}<br>
+                        {% if field.errors %}
+                            <span>{{field.errors[0]}}</span>
+                        {% endif %}<br>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <button type="submit">Add cafe</button>
+            </div>        
+        </div>
+
+      </form>
+
+
+
+	  <p class="space-above"><a href="{{url_for('cafes')}}">See all cafes</a></p>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
